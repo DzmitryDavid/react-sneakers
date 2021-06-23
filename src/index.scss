@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui;
+  background-color: #E7F6FF;
+}
+
+h2,h3, h1, p {
+  margin: 0;
+}
+ul {
+  img {
+    margin-right: 15px;
+  }
+}
+header {
+  border-bottom: 1px solid #EAEAEA;
+}
+
+.card {
+  width: 220px;
+  height: 260px;
+  border-radius: 40px;
+  padding: 20px;
+  border: 1px solid #F3F3F3;
+  background-color: #FFFFFF;
+  margin-right: 30px;
+  span {
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+}
+.wrapper {
+  background: #FFFFFF;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
+  max-width: 1080px;
+  margin: 50px auto;
+}
+.button {
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+.content {
+  h1 {
+    padding-bottom: 40px;
+  }
+}
+.sneakers {
+  display: flex;
+}
