@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    &-img {
+      margin-right: 20px;
+    }
+    &-title {
+      text-transform: uppercase;
+    }
+    &-subtitle {
+      opacity: 0.5;
+    }
+  }
+  &__status {
+    display: flex;
+    align-items: center;
+    span {
+      margin-left: 15px;
+    }
+    &-item {
+      display: flex;
+      cursor: pointer;
+      margin-right: 20px;
+      img {
+        text-align: center;
+        align-items: center;
+      }
+    }
+  }
+}

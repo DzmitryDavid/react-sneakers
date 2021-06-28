@@ -1,27 +1,44 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Header = ({onClickCartOpen}) => {
+import './Header.scss';
+
+const Header = ({ onClickCartOpen }) => {
   return (
-    <header className="d-flex justify-between align-center p-40">
-        <div className="d-flex align-center">
-          <img className="mr-20" src="img/sneakersLogo.png" alt="logo" />
-          <div>
-            <h2 className="text-uppercase">React sneakers</h2>
-              <p className="opacity-5">Магазин лучших кроссовок</p>
-          </div>
+    <header className="header">
+      <div className="header__logo">
+        <Link to="/">
+          <img 
+            className="header__logo-img" 
+            src="img/sneakersLogo.png" 
+            alt="logo" />
+        
+        <div>
+          <h2 className="header__logo-title">React sneakers</h2>
+          <p className="header__logo-subtitle">Магазин лучших кроссовок</p>
         </div>
-          <ul className="d-flex">
-            <li
-              onClick={onClickCartOpen}
-              className="mr-30 cu-p">
-              <img src="/img/Cart.svg" alt="cart" />
-              <span>1205руб</span>
-            </li>
-            <li>
-              <img src="/img/User.svg" alt="userLogo" />
-              </li>
-          </ul>
-      </header>
-  )
-}
+        </Link>
+      </div>
+      <ul className="header__status">
+        <li 
+          onClick={onClickCartOpen} 
+          className="header__status-item">
+          <img src="/img/Cart.svg" alt="cart" />
+          <span>1205руб</span>
+        </li>
+        <Link to="/favorites">
+          <li 
+            className="header__status-item">
+            <img src="/img/Like.svg" alt="like Logo" />
+          </li>
+        </Link>
+        
+        <li 
+          className="header__status-item">
+          <img src="/img/User.svg" alt="userLogo" />
+        </li>
+      </ul>
+    </header>
+  );
+};
 export default Header;

@@ -1,0 +1,133 @@
+.empty-cart {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+  &__title {
+    opacity: 0.6;
+    width: 280px;
+    line-height: 24px;
+  }
+  
+  &__icon {
+    margin-bottom: 20px;
+    width: 120px;
+    height: 120px;
+  }
+  .greenBtn {
+    width: 245px;
+    margin-top: 20px;
+
+    &:hover {
+      img {
+        transform: rotate(180deg) translateX(3px);
+      }
+    }
+
+    img {
+      position: relative;
+      top: 1px;
+      transform: rotate(180deg);
+      margin-right: 15px;
+      transition: transform 0.15s ease-in-out;
+    }
+  }
+}
+.drawer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 420px;
+  height: 100%;
+  right: 0;
+  padding: 30px;
+  background: #FFFFFF;
+  box-shadow: -10px 4px  24px rgba(0, 0, 0, 0.1);
+  h2 {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+  }
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba($color: #000000, $alpha: 0.25)
+
+}
+
+.cart {
+  &-total {
+    .greenBtn {
+      position: relative;
+      &:hover {
+        img {
+          
+          transform: translateX(8px)
+        }
+      }
+      img {
+        position: absolute;
+        right: 30px;
+        top: 20px;
+        transition: transform .2s ease-in-out;
+      }
+    }
+  }
+  &-img {
+    height: 70px;
+    width: 70px;
+    background-size: contain;
+    background-position: 0 10px;
+    background-repeat: no-repeat;
+    margin-right: 15px;
+  }
+  &-items {
+    margin-bottom: 40px;
+    overflow: auto;
+
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+
+    p {
+      font-size: 14px;
+    }
+  }
+  &-item {
+    display: flex;
+    background: #FFFFFF;
+    border: 1px solid #F3F3F3;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 20px 10px;
+    margin-bottom: 20px;
+  }
+  &-summary {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+
+    &__item {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 20px;
+      div {
+        position: relative;
+        flex: 1;
+        height: 1px;
+        border-bottom: 1px dashed #DFDFDF;
+        top: -4px;
+        margin: 0 10px;
+      }
+    }
+  }
+}
