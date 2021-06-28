@@ -1,22 +1,27 @@
 import React from 'react';
 
-const Drawer = () => {
+const Drawer = ({onClickCartClose, items = []}) => {
   return (
     <div className="overlay">
       <div className="drawer">
       <h2>Корзина
-      <img className="remove-btn" src="/img/btn-remove.svg" alt="Remove" />
+      <img
+        onClick={onClickCartClose}
+        className="remove-btn" src="/img/btn-remove.svg" alt="Remove" />
 
       </h2>
       <div className="cart-items">
-        <div className="cart-item">
-          <div className="cart-img" style= {{backgroundImage: 'url(/img/sneakers/1.jpg)'}}></div>
+        {items.map((item) => (
+          <div className="cart-item">
+          <div className="cart-img" style= {{backgroundImage: `url(${item.imgUrl})`}}></div>
           <div className="mr-10">
-            <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-            <b>12 999</b>
+            <p>{item.title}</p>
+            <b>{item.price}</b>
           </div>
           <img className="remove-btn" src="/img/btn-remove.svg" alt="Remove" />
         </div>
+        ))}
+        
       </div>
       
       <div className="cart-total">
