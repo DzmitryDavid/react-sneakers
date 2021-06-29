@@ -15,10 +15,12 @@ const Drawer = ({ onClickCartClose, items = [], onRemove }) => {
           />
         </h2>
         {items.length > 0 ? (
-          <>
+          <div>
             <div className="cart-items">
               {items.map((item) => (
-                <div className="cart-item">
+                <div 
+                  key={item.id}
+                  className="cart-item">
                   <div
                     className="cart-img"
                     style={{ backgroundImage: `url(${item.imgUrl})` }}
@@ -54,7 +56,7 @@ const Drawer = ({ onClickCartClose, items = [], onRemove }) => {
                 <img src="/img/Arrow.svg" alt="ArrowRight" />
               </button>
             </div>
-          </>
+          </div>
         ) : (
           <div className="empty-cart">
             <img

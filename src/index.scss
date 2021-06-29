@@ -27,8 +27,6 @@ header {
 }
 
 
-
-
 .favorite {
   position: absolute;
   cursor: pointer;
@@ -40,7 +38,6 @@ header {
   transition: opacity 0.2s ease-in-out;
   &:hover {
     opacity: 1;
-
   }
 }
 .greenBtn {
