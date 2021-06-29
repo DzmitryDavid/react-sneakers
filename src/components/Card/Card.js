@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './Card.module.scss';
 
-const Card = ({title, imgUrl, price, onAddToCart, onFavorite }) => {
+const Card = ({id, title, imgUrl, price, onAddToCart, onAddToFavorite, favorited = false }) => {
   const [isAdded, setIsAdded] = React.useState(false);
-  const [isFavoriteIcon, setIsFavoriteIcon] = React.useState(false);
+  const [isFavoriteIcon, setIsFavoriteIcon] = React.useState(favorited);
 
   const onFavoriteIconChange = () => {
-    onFavorite({title,imgUrl, price})
+    console.log(id);
+    onAddToFavorite({id, title, imgUrl, price})
     setIsFavoriteIcon(!isFavoriteIcon)
   }
   const onPlusClick = () => {
