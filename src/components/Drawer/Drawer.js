@@ -1,7 +1,44 @@
 import React from 'react';
+import axios from 'axios';
+import Info from '../Info/Info';
+import useCart from '../../hooks/useCart';
 import './Drawer.scss';
 
+const delay = () => new Promise((res) => setTimeout(res, 1000));
+
 const Drawer = ({ onClickCartClose, items = [], onRemove }) => {
+  const { totalPrice, cartItems, setCartItems, tax } = useCart();
+
+  const [isOrderComplete, setIsOrderComplete] = React.useState(false);
+  const [orderId, setOrderId] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const onClickOrder = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(
+        `https://60d51f31943aa600177687d3.mockapi.io/orders`,
+        {
+          items: cartItems,
+        }
+      );
+      setOrderId(data.id);
+      setIsOrderComplete(true);
+      setCartItems([]);
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i];
+        await axios.delete(
+          `https://60d51f31943aa600177687d3.mockapi.io/cart/${item.id}`
+        );
+        await delay();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+
   return (
     <div className="overlay">
       <div className="drawer">
@@ -15,12 +52,10 @@ const Drawer = ({ onClickCartClose, items = [], onRemove }) => {
           />
         </h2>
         {items.length > 0 ? (
-          <div>
+          <>
             <div className="cart-items">
               {items.map((item) => (
-                <div 
-                  key={item.id}
-                  className="cart-item">
+                <div key={item.id} className="cart-item">
                   <div
                     className="cart-img"
                     style={{ backgroundImage: `url(${item.imgUrl})` }}
@@ -43,38 +78,38 @@ const Drawer = ({ onClickCartClose, items = [], onRemove }) => {
                 <li className="cart-summary__item">
                   <span>Итого:</span>
                   <div></div>
-                  <b>21 648</b>
+                  <b>{totalPrice}</b>
                 </li>
                 <li className="cart-summary__item">
                   <span>Налог 5%:</span>
                   <div></div>
-                  <b>1074</b>
+                  <b>{tax}</b>
                 </li>
               </ul>
-              <button className="greenBtn">
+              <button
+                disabled={isLoading}
+                onClick={onClickOrder}
+                className="greenBtn"
+              >
                 Оформить заказ
-                <img src="/img/Arrow.svg" alt="ArrowRight" />
+                <img
+                  className="arrow-icon"
+                  src="/img/Arrow.svg"
+                  alt="ArrowRight"
+                />
               </button>
             </div>
-          </div>
+          </>
         ) : (
-          <div className="empty-cart">
-            <img
-              className="empty-cart__icon"
-              src="img/emptyCart.png"
-              alt="Empty cart"
-            />
-            <h2>Корзина пустая</h2>
-            <p className="empty-cart__title">
-              Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
-            </p>
-            <button 
-              onClick={onClickCartClose}
-              className="greenBtn">
-              <img src="img/Arrow.svg" alt="Arrow" />
-              Вернуться назад
-            </button>
-          </div>
+          <Info
+            title={isOrderComplete ? 'Заказ оформлен' : 'Корзина пустая'}
+            description={
+              isOrderComplete
+                ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
+                : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'
+            }
+            image={isOrderComplete ? 'img/order.png' : 'img/emptyCart.png'}
+          />
         )}
       </div>
     </div>

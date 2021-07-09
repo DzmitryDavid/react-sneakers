@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from './Card.module.scss';
+import './Card.scss';
 import ContentLoader from 'react-content-loader';
+import AppContext from '../../pages/Context';
 
 const Card = ({
   id,
@@ -10,23 +11,23 @@ const Card = ({
   onAddToCart,
   onAddToFavorite,
   favorited = false,
-  added = false,
   loading = false 
 }) => {
-  const [isAdded, setIsAdded] = React.useState(added);
+  const { isItemAdded } = React.useContext(AppContext);
+
   const [isFavorite, setIsFavorite] = React.useState(favorited);
 
   const onFavoriteChange = () => {
     onAddToFavorite({ id, title, imgUrl, price });
     setIsFavorite(!isFavorite);
   };
+  
   const onPlusClick = () => {
     onAddToCart({ id, title, imgUrl, price });
-    setIsAdded(!isAdded);
   };
 
   return (
-    <div className={styles.card}>
+    <div className="card">
       {
         loading ? <ContentLoader 
         speed={2}
@@ -43,14 +44,14 @@ const Card = ({
         <rect x="124" y="230" rx="5" ry="5" width="32" height="32" />
       </ContentLoader> : 
         <>
-          <div className={styles.favorite}>
+        { onAddToFavorite && <div className="favorite">
             <img
-              className={styles.favoriteIcon}
+              className="favorite__icon"
               onClick={onFavoriteChange}
               src={isFavorite ? '/img/HeartLiked.svg' : '/img/HeartUnliked.svg'}
               alt="heart"
             />
-          </div>
+          </div>}
           <img height={135} width="100%" src={imgUrl} alt="sneakers" />
           <h5>{title}</h5>
           <div className="d-flex justify-between align-center">
@@ -58,12 +59,12 @@ const Card = ({
               <span>Цена: </span>
               <b>{price}</b>
             </div>
-        <img
-          className={styles.plus}
-          src={isAdded ? 'img/ButtonChecked.svg' : 'img/Plus.svg'}
+        {onAddToCart && <img
+          className="plus"
+          src={isItemAdded(id) ? 'img/ButtonChecked.svg' : 'img/Plus.svg'}
           onClick={onPlusClick}
           alt="plus"
-        />
+        />}
       </div>
         </>
       }

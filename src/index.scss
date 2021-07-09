@@ -59,4 +59,9 @@ header {
     background: darken(#9DD558, 7%);
 
   }
+  &:disabled {
+    background-color: #bebebe;
+    cursor: default;
+  }
+  
 }

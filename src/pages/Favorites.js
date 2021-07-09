@@ -5,7 +5,6 @@ import Card from '../components/Card/Card';
 
 const Favorites = ({ onAddToFavorite}) => {
   const state = React.useContext(AppContext);
-  console.log(state);
   return (
     <div className="content">
         <div className="content-heading">
