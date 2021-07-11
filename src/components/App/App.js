@@ -21,16 +21,16 @@ const App = () => {
     async function fetchData() {
       const cartRes = await axios.get(
         'https://60d51f31943aa600177687d3.mockapi.io/cart'
-        );
-        const favoritesRes = await axios.get(
-          'https://60d51f31943aa600177687d3.mockapi.io/favorites'
-          );
-          const itemsRes = await axios.get(
+      );
+      const favoritesRes = await axios.get(
+        'https://60d51f31943aa600177687d3.mockapi.io/favorites'
+      );
+      const itemsRes = await axios.get(
         'https://60d51f31943aa600177687d3.mockapi.io/items'
       );
-      
+
       setIsLoading(false);
-      
+
       setCartItems(cartRes.data);
       setFavorites(favoritesRes.data);
       setItems(itemsRes.data);
@@ -39,7 +39,6 @@ const App = () => {
   }, []);
 
   const onAddToCart = (obj) => {
-    console.log(obj);
     try {
       if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
         axios.delete(
@@ -56,7 +55,6 @@ const App = () => {
   };
 
   const onAddToFavorite = async (obj) => {
-    console.log(obj);
     try {
       if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id))) {
         axios.delete(
@@ -86,29 +84,29 @@ const App = () => {
     setSearchValue(e.target.value);
   };
   const isItemAdded = (id) => {
-    return cartItems.some(obj => Number(obj.id) === Number(id))
-  }
+    return cartItems.some((obj) => Number(obj.id) === Number(id));
+  };
 
   return (
-    <AppContext.Provider 
-    value={{ items,
-      cartItems, 
-      favorites, 
-      isItemAdded, 
-      setCartOpened, 
-      setCartItems,
-      onAddToFavorite, 
-      onAddToCart }}>
-
+    <AppContext.Provider
+      value={{
+        items,
+        cartItems,
+        favorites,
+        isItemAdded,
+        setCartOpened,
+        setCartItems,
+        onAddToFavorite,
+        onAddToCart,
+      }}
+    >
       <div className="wrapper clear">
-        {cartOpened && (
-          <Drawer
-            onRemove={onRemoveItem}
-            items={cartItems}
-            onClickCartClose={() => setCartOpened(false)}
-          />
-        )}
-
+        <Drawer
+          onRemove={onRemoveItem}
+          items={cartItems}
+          onClickCartClose={() => setCartOpened(false)}
+          opened={cartOpened}
+        />
         <Header onClickCartOpen={() => setCartOpened(true)} />
         <Route path="/" exact>
           <Home

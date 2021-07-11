@@ -48,7 +48,7 @@ const Card = ({
             <img
               className="favorite__icon"
               onClick={onFavoriteChange}
-              src={isFavorite ? '/img/HeartLiked.svg' : '/img/HeartUnliked.svg'}
+              src={isFavorite ? '/img/HeartLiked.svg' : 'img/HeartUnliked.svg'}
               alt="heart"
             />
           </div>}
@@ -61,7 +61,7 @@ const Card = ({
             </div>
         {onAddToCart && <img
           className="plus"
-          src={isItemAdded(id) ? 'img/ButtonChecked.svg' : 'img/Plus.svg'}
+          src={isItemAdded(id) ? '/img/ButtonChecked.svg' : 'img/Plus.svg'}
           onClick={onPlusClick}
           alt="plus"
         />}

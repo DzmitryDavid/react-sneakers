@@ -24,17 +24,12 @@
       left: 30px;
       top: 20px;
       transition: transform .2s ease-in-out;
-
-      
     }
     &:hover {
       img {
         transform: translateX(-8px);
-
       }
     }
-  
-    
   }
 }
 
@@ -62,6 +57,11 @@
   }
 }
 .overlay {
+  visibility: hidden;
+  &-visible {
+  visibility: visible;
+
+  }
   position: absolute;
   top: 0;
   left: 0;

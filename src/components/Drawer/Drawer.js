@@ -4,9 +4,14 @@ import Info from '../Info/Info';
 import useCart from '../../hooks/useCart';
 import './Drawer.scss';
 
+import btnRemoveImg from '../../assets/img/btn-remove.svg';
+import btnArrowImg from '../../assets/img/Arrow.svg';
+import orderImg from '../../assets/img/order.png';
+import emptyCartImg from '../../assets/img/emptyCart.png';
+
 const delay = () => new Promise((res) => setTimeout(res, 1000));
 
-const Drawer = ({ onClickCartClose, items = [], onRemove }) => {
+const Drawer = ({ onClickCartClose, items = [], onRemove, opened }) => {
   const { totalPrice, cartItems, setCartItems, tax } = useCart();
 
   const [isOrderComplete, setIsOrderComplete] = React.useState(false);
@@ -40,14 +45,14 @@ const Drawer = ({ onClickCartClose, items = [], onRemove }) => {
   };
 
   return (
-    <div className="overlay">
+    <div className={`overlay ${opened ? 'overlay-visible' : ''}`}>
       <div className="drawer">
         <h2>
           Корзина
           <img
             onClick={onClickCartClose}
             className="remove-btn"
-            src="/img/btn-remove.svg"
+            src={btnRemoveImg}
             alt="Remove"
           />
         </h2>
@@ -67,7 +72,7 @@ const Drawer = ({ onClickCartClose, items = [], onRemove }) => {
                   <img
                     onClick={() => onRemove(item.id)}
                     className="remove-btn"
-                    src="/img/btn-remove.svg"
+                    src={btnRemoveImg}
                     alt="Remove"
                   />
                 </div>
@@ -94,7 +99,7 @@ const Drawer = ({ onClickCartClose, items = [], onRemove }) => {
                 Оформить заказ
                 <img
                   className="arrow-icon"
-                  src="/img/Arrow.svg"
+                  src={btnArrowImg}
                   alt="ArrowRight"
                 />
               </button>
@@ -108,7 +113,7 @@ const Drawer = ({ onClickCartClose, items = [], onRemove }) => {
                 ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
                 : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'
             }
-            image={isOrderComplete ? 'img/order.png' : 'img/emptyCart.png'}
+            image={isOrderComplete ? {orderImg} : {emptyCartImg}}
           />
         )}
       </div>

@@ -1,7 +1,8 @@
-// import React, {useContext} from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import useCart from '../../hooks/useCart';
 import './Header.scss';
+import sneakersLogo from  '../../assets/img/sneakersLogo.png';
 
 const Header = ({ onClickCartOpen }) => {
   const {totalPrice} = useCart();
@@ -12,8 +13,8 @@ const Header = ({ onClickCartOpen }) => {
         <Link to="/">
           <img 
             className="header__logo-img" 
-            src="img/sneakersLogo.png" 
-            alt="logo" />
+            src={sneakersLogo} 
+            alt="Logo" />
         <div>
           <h2 className="header__logo-title">React sneakers</h2>
           <p className="header__logo-subtitle">Магазин лучших кроссовок</p>
